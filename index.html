@@ -2,16 +2,69 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Loading Dashboard...</title>
+  <title>System Check</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      text-align: center;
+      padding-top: 100px;
+      background-color: #111;
+      color: white;
+    }
+
+    button {
+      font-size: 1.5rem;
+      padding: 15px 30px;
+      cursor: pointer;
+      background-color: #00ffcc;
+      border: none;
+      border-radius: 10px;
+      transition: background 0.3s;
+    }
+
+    button:hover {
+      background-color: #00ddb3;
+    }
+
+    iframe {
+      display: none;
+      width: 100vw;
+      height: 100vh;
+      border: none;
+    }
+  </style>
 </head>
 <body>
-  <h2>Initializing system… please wait.</h2>
-  <iframe width="560" height="315" 
-    src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&mute=0" 
-    title="Rick Astley - Never Gonna Give You Up"
-    frameborder="0"
-    allow="autoplay; encrypted-media"
+
+  <h1>Important Update Available</h1>
+  <p>Click the button below to install the update.</p>
+  <button onclick="playRickroll()">Install Now</button>
+
+  <iframe 
+    id="rickroll" 
+    src="https://www.youtube.com/embed/dQw4w9WgXcQ?enablejsapi=1&autoplay=1"
+    allow="autoplay; fullscreen"
     allowfullscreen>
   </iframe>
+
+  <script>
+    function playRickroll() {
+      const iframe = document.getElementById("rickroll");
+      iframe.style.display = "block";
+
+      // Request fullscreen
+      if (iframe.requestFullscreen) {
+        iframe.requestFullscreen();
+      } else if (iframe.webkitRequestFullscreen) {
+        iframe.webkitRequestFullscreen();
+      } else if (iframe.msRequestFullscreen) {
+        iframe.msRequestFullscreen();
+      }
+
+      // Start video via postMessage to enable autoplay
+      iframe.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', '*');
+    }
+  </script>
+
 </body>
 </html>
